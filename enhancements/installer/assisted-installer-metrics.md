@@ -52,6 +52,8 @@ As a telemetry analyst I would like to create queries which show why users faile
 
 As a telemetry analyst I would like to create queries which break down the installation time experienced by users.
 
+As a telemetry analyst, I would like to understand what phases and configurations cause the majority of the installation failures.
+
 As a telemetry analyst I would like to create queries which show useful characteristics about the cluster hardware, to understand how it may affect installation success rates, and to focus further OpenShift development.
 
 ### Implementation Details/Notes/Constraints [optional]
@@ -152,6 +154,20 @@ The example above represents a single sample. This sample indicates that during 
  * `result` - as a first stage will be binary (success/failure), once we support error codes we would use those
  * `version` - represents minor releases
   * `le` - the standard Prometheus label for histogram buckets, this represents how long the installation took to complete, from 1 minute (or less) to 60 minutes (or more), in increments of 5 minutes.
+
+##### assisted_installer_cluster_dns_types
+`assisted_installer_cluster_dns_types` represents the number of clusters installed with private vs hosted DNS.
+
+```
+# HELP assisted_installer_cluster_dns_types represents the number of clusters installed with private vs hosted DNS.
+# TYPE assisted_installer_cluster_dns_types counter
+assisted_installer_cluster_creations{result="success", version="4.6", hosted="true"} 50
+```
+
+###### Label Values
+ * `result` - as a first stage will be binary (success/failure), once we support error codes we would use those
+ * `version` - represents minor releases
+ * 'hosted' - DNS is hosted ("true") or not ("false")
 
 ##### assisted_installer_cluster_hosts
 `assisted_installer_cluster_hosts` represents the number of hosts that took part in an installation.  Dividing by the number of installations gives the average number of hosts.
