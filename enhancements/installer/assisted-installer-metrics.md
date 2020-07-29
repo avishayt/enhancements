@@ -68,10 +68,11 @@ The installer does not fit a typical Prometheus use case in that:
 ```
 # HELP assisted_installer_cluster_creations represents the number of cluster resources created in the assisted installer service.
 # TYPE assisted_installer_cluster_creations counter
-assisted_installer_cluster_creations{version="4.6"} 50
+assisted_installer_cluster_creations{platform="metal", version="4.6"} 50
 ```
 
 ###### Label Values
+ * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
  * `version` - represents minor releases
 
 ##### assisted_installer_cluster_installation_started
@@ -80,36 +81,38 @@ assisted_installer_cluster_creations{version="4.6"} 50
 ```
 # HELP assisted_installer_cluster_installation_started represents the number of clusters whose installation began.
 # TYPE assisted_installer_cluster_installation_started counter
-assisted_installer_cluster_installation_started{version="4.6"} 40
+assisted_installer_cluster_installation_started{platform="metal", version="4.6"} 40
 ```
 
 ###### Label Values
+ * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
  * `version` - represents minor releases
-
+ 
 ##### assisted_installer_cluster_installation_minutes
  `assisted_installer_cluster_installation_minutes` represents an invocation of the installation, from start to finish.
 
 ```
 # HELP assisted_installer_cluster_installation_minutes represents an invocation of the installation, from start to finish.
 # TYPE assisted_installer_cluster_installation_minutes histogram
-assisted_installer_cluster_installation_minutes_bucket{result="success",version="4.6",le="1"} 0
-assisted_installer_cluster_installation_minutes_bucket{result="success",version="4.6",le="5"} 0
-assisted_installer_cluster_installation_minutes_bucket{result="success",version="4.6",le="10"} 0
-assisted_installer_cluster_installation_minutes_bucket{result="success",version="4.6",le="15"} 0
-assisted_installer_cluster_installation_minutes_bucket{result="success",version="4.6",le="20"} 0
-assisted_installer_cluster_installation_minutes_bucket{result="success",version="4.6",le="25"} 0
-assisted_installer_cluster_installation_minutes_bucket{result="success",version="4.6",le="30"} 1
-assisted_installer_cluster_installation_minutes_bucket{result="success",version="4.6",le="35"} 1
-assisted_installer_cluster_installation_minutes_bucket{result="success",version="4.6",le="40"} 1
-assisted_installer_cluster_installation_minutes_bucket{result="success",version="4.6",le="45"} 1
-assisted_installer_cluster_installation_minutes_bucket{result="success",version="4.6",le="50"} 1
-assisted_installer_cluster_installation_minutes_bucket{result="success",version="4.6",le="55"} 1
-assisted_installer_cluster_installation_minutes_bucket{result="success",version="4.6",le="60"} 1
-assisted_installer_cluster_installation_minutes_bucket{result="success",version="4.6",le="+Inf"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="1"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="5"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="10"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="15"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="20"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="25"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="30"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="35"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="40"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="45"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="50"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="55"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="60"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="+Inf"} 1
 ```
 The example above represents a single sample. This sample indicates that a user successfully installed a 4.6 cluster, which took between 30 and 35 minutes to complete installation. 
 
 ###### Label Values
+ * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
  * `result` - as a first stage will be binary (success/failure), once we support error codes we would use those
  * `version` - represents minor releases
  * `le` - the standard Prometheus label for histogram buckets, this represents how long the installation took to complete, from 1 minute (or less) to 60 minutes (or more), in increments of 5 minutes.
@@ -120,24 +123,25 @@ The example above represents a single sample. This sample indicates that a user 
 ```
 # HELP assisted_installer_host_installation_stage_minutes represents a stage of the installation process for a host.
 # TYPE assisted_installer_host_installation_stage_minutes histogram
-assisted_installer_host_installation_stage_minutes_bucket{stage="Rebooting", role="worker", result="success",version="4.6",le="1"} 0
-assisted_installer_host_installation_stage_minutes_bucket{stage="Rebooting", role="worker",result="success",version="4.6",le="5"} 0
-assisted_installer_host_installation_stage_minutes_bucket{stage="Rebooting", role="worker",result="success",version="4.6",le="10"} 0
-assisted_installer_host_installation_stage_minutes_bucket{stage="Rebooting", role="worker",result="success",version="4.6",le="15"} 1
-assisted_installer_host_installation_stage_minutes_bucket{stage="Rebooting", role="worker",result="success",version="4.6",le="20"} 1
-assisted_installer_host_installation_stage_minutes_bucket{stage="Rebooting", role="worker",result="success",version="4.6",le="25"} 1
-assisted_installer_host_installation_stage_minutes_bucket{stage="Rebooting", role="worker",result="success",version="4.6",le="30"} 1
-assisted_installer_host_installation_stage_minutes_bucket{stage="Rebooting", role="worker",result="success",version="4.6",le="35"} 1
-assisted_installer_host_installation_stage_minutes_bucket{stage="Rebooting", role="worker",result="success",version="4.6",le="40"} 1
-assisted_installer_host_installation_stage_minutes_bucket{stage="Rebooting", role="worker",result="success",version="4.6",le="45"} 1
-assisted_installer_host_installation_stage_minutes_bucket{stage="Rebooting", role="worker",result="success",version="4.6",le="50"} 1
-assisted_installer_host_installation_stage_minutes_bucket{stage="Rebooting", role="worker",result="success",version="4.6",le="55"} 1
-assisted_installer_host_installation_stage_minutes_bucket{stage="Rebooting", role="worker",result="success",version="4.6",le="60"} 1
-assisted_installer_host_installation_stage_minutes_bucket{stage="Rebooting", role="worker",result="success",version="4.6",le="+Inf"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success",version="4.6",le="1"} 0
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="5"} 0
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="10"} 0
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="15"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="20"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="25"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="30"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="35"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="40"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="45"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="50"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="55"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="60"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="+Inf"} 1
 ```
 The example above represents a single sample. This sample indicates that during the installation of a 4.6 cluster, the phase where this worker host rebooted took between 10 and 15 minutes to complete.
 
 ###### Label Values
+ * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
  * `stage` - a non-final stage in the installation, could be one of:
     - Starting installation
     - Waiting for control plane
@@ -161,10 +165,11 @@ The example above represents a single sample. This sample indicates that during 
 ```
 # HELP assisted_installer_cluster_dns_types represents the number of clusters installed with private vs hosted DNS.
 # TYPE assisted_installer_cluster_dns_types counter
-assisted_installer_cluster_creations{result="success", version="4.6", hosted="true"} 50
+assisted_installer_cluster_creations{platform="metal", result="success", version="4.6", hosted="true"} 50
 ```
 
 ###### Label Values
+ * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
  * `result` - as a first stage will be binary (success/failure), once we support error codes we would use those
  * `version` - represents minor releases
  * 'hosted' - DNS is hosted ("true") or not ("false")
@@ -175,10 +180,11 @@ assisted_installer_cluster_creations{result="success", version="4.6", hosted="tr
 ```
 # HELP assisted_installer_cluster_hosts represents the number of hosts in an installation.
 # TYPE assisted_installer_cluster_hosts counter
-assisted_installer_cluster_hosts{role="master", result="success", version="4.6"} 3
+assisted_installer_cluster_hosts{platform="metal", role="master", result="success", version="4.6"} 3
 ```
 
 ###### Label Values
+ * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
  * `role` - the role assigned to the host for the installation, could be one of:
     - master
     - worker
@@ -191,21 +197,22 @@ assisted_installer_cluster_hosts{role="master", result="success", version="4.6"}
 ```
 # HELP assisted_installer_cluster_host_cores represents the number of CPU cores for an installed host.
 # TYPE assisted_installer_cluster_host_cores histogram
-assisted_installer_cluster_host_cores_bucket{role="master",result="success",version="4.6",le="1"} 0
-assisted_installer_cluster_host_cores_bucket{role="master",result="success",version="4.6",le="2"} 0
-assisted_installer_cluster_host_cores_bucket{role="master",result="success",version="4.6",le="4"} 0
-assisted_installer_cluster_host_cores_bucket{role="master",result="success",version="4.6",le="8"} 0
-assisted_installer_cluster_host_cores_bucket{role="master",result="success",version="4.6",le="16"} 0
-assisted_installer_cluster_host_cores_bucket{role="master",result="success",version="4.6",le="32"} 1
-assisted_installer_cluster_host_cores_bucket{role="master",result="success",version="4.6",le="64"} 1
-assisted_installer_cluster_host_cores_bucket{role="master",result="success",version="4.6",le="128"} 1
-assisted_installer_cluster_host_cores_bucket{role="master",result="success",version="4.6",le="256"} 1
-assisted_installer_cluster_host_cores_bucket{role="master",result="success",version="4.6",le="512"} 1
-assisted_installer_cluster_host_cores_bucket{role="master",result="success",version="4.6",le="+Inf"} 1
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="1"} 0
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="2"} 0
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="4"} 0
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="8"} 0
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="16"} 0
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="32"} 1
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="64"} 1
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="128"} 1
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="256"} 1
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="512"} 1
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="+Inf"} 1
 ```
 The example above represents a single sample. This sample indicates that this host, that was successfully-installed with version 4.6 and a master role, had between 32 and 64 CPU cores.
 
 ###### Label Values
+ * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
  * `role` - the role assigned to the host for the installation, could be one of:
     - master
     - worker
@@ -219,20 +226,21 @@ The example above represents a single sample. This sample indicates that this ho
 ```
 # HELP assisted_installer_cluster_host_ram_gib represents the amount of RAM in GiB for an installed host.
 # TYPE assisted_installer_cluster_host_ram_gib histogram
-assisted_installer_cluster_host_ram_gib_bucket{role="master",result="success",version="4.6",le="8"} 0
-assisted_installer_cluster_host_ram_gib_bucket{role="master",result="success",version="4.6",le="16"} 0
-assisted_installer_cluster_host_ram_gib_bucket{role="master",result="success",version="4.6",le="32"} 1
-assisted_installer_cluster_host_ram_gib_bucket{role="master",result="success",version="4.6",le="64"} 1
-assisted_installer_cluster_host_ram_gib_bucket{role="master",result="success",version="4.6",le="128"} 1
-assisted_installer_cluster_host_ram_gib_bucket{role="master",result="success",version="4.6",le="256"} 1
-assisted_installer_cluster_host_ram_gib_bucket{role="master",result="success",version="4.6",le="512"} 1
-assisted_installer_cluster_host_ram_gib_bucket{role="master",result="success",version="4.6",le="1024"} 1
-assisted_installer_cluster_host_ram_gib_bucket{role="master",result="success",version="4.6",le="2048"} 1
-assisted_installer_cluster_host_ram_gib_bucket{role="master",result="success",version="4.6",le="+Inf"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="8"} 0
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="16"} 0
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="32"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="64"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="128"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="256"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="512"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="1024"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="2048"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="+Inf"} 1
 ```
 The example above represents a single sample. This sample indicates that this host, that was successfully-installed with version 4.6 and a master role, had between 32 and 64 GiB of RAM.
 
 ###### Label Values
+ * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
  * `role` - the role assigned to the host for the installation, could be one of:
     - master
     - worker
@@ -246,18 +254,19 @@ The example above represents a single sample. This sample indicates that this ho
 ```
 # HELP assisted_installer_cluster_host_disk_gb represents the size of a disk in GB in an installed host.
 # TYPE assisted_installer_cluster_host_disk_gb histogram
-assisted_installer_cluster_host_disk_gb_bucket{role="master",result="success",version="4.6",le="250"} 0
-assisted_installer_cluster_host_disk_gb_bucket{role="master",result="success",version="4.6",le="500"} 0
-assisted_installer_cluster_host_disk_gb_bucket{role="master",result="success",version="4.6",le="1000"} 1
-assisted_installer_cluster_host_disk_gb_bucket{role="master",result="success",version="4.6",le="2000"} 1
-assisted_installer_cluster_host_disk_gb_bucket{role="master",result="success",version="4.6",le="4000"} 1
-assisted_installer_cluster_host_disk_gb_bucket{role="master",result="success",version="4.6",le="8000"} 1
-assisted_installer_cluster_host_disk_gb_bucket{role="master",result="success",version="4.6",le="16000"} 1
-assisted_installer_cluster_host_disk_gb_bucket{role="master",result="success",version="4.6",le="+Inf"} 1
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="250"} 0
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="500"} 0
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="1000"} 1
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="2000"} 1
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="4000"} 1
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="8000"} 1
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="16000"} 1
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="+Inf"} 1
 ```
 The example above represents a single sample. This sample indicates that this host, that was successfully-installed with version 4.6 and a master role, has a disk with capacity between 1TB and 2TB.
 
 ###### Label Values
+ * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
  * `role` - the role assigned to the host for the installation, could be one of:
     - master
     - worker
@@ -271,15 +280,16 @@ The example above represents a single sample. This sample indicates that this ho
 ```
 # HELP assisted_installer_cluster_host_nic_gbps represents the size of a NIC in Gbps in an installed host.
 # TYPE assisted_installer_cluster_host_nic_gbps histogram
-assisted_installer_cluster_host_nic_gbps_bucket{role="master",result="success",version="4.6",le="1"} 0
-assisted_installer_cluster_host_nic_gbps_bucket{role="master",result="success",version="4.6",le="10"} 0
-assisted_installer_cluster_host_nic_gbps_bucket{role="master",result="success",version="4.6",le="40"} 1
-assisted_installer_cluster_host_nic_gbps_bucket{role="master",result="success",version="4.6",le="100"} 1
-assisted_installer_cluster_host_nic_gbps_bucket{role="master",result="success",version="4.6",le="+Inf"} 1
+assisted_installer_cluster_host_nic_gbps_bucket{platform="metal", role="master",result="success",version="4.6",le="1"} 0
+assisted_installer_cluster_host_nic_gbps_bucket{platform="metal", role="master",result="success",version="4.6",le="10"} 0
+assisted_installer_cluster_host_nic_gbps_bucket{platform="metal", role="master",result="success",version="4.6",le="40"} 1
+assisted_installer_cluster_host_nic_gbps_bucket{platform="metal", role="master",result="success",version="4.6",le="100"} 1
+assisted_installer_cluster_host_nic_gbps_bucket{platform="metal", role="master",result="success",version="4.6",le="+Inf"} 1
 ```
 The example above represents a single sample. This sample indicates that this host, that was successfully-installed with version 4.6 and a master role, has a NIC with bandwidth between 40 and 100 Gbps.
 
 ###### Label Values
+ * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
  * `role` - the role assigned to the host for the installation, could be one of:
     - master
     - worker
