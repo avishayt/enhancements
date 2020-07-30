@@ -73,7 +73,7 @@ assisted_installer_cluster_creations{platform="metal", version="4.6"} 50
 
 ###### Label Values
  * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
- * `version` - represents minor releases
+ * `version` - represents OCP minor releases
 
 ##### assisted_installer_cluster_installation_started
 `assisted_installer_cluster_installation_started` represents the clusters that started the actual installation process. It signifies that a user was able to fulfill the requirements and boot the hosts, but not necessarily that the installation process completed in any way.
@@ -86,7 +86,7 @@ assisted_installer_cluster_installation_started{platform="metal", version="4.6"}
 
 ###### Label Values
  * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
- * `version` - represents minor releases
+ * `version` - represents OCP minor releases
  
 ##### assisted_installer_cluster_installation_minutes
  `assisted_installer_cluster_installation_minutes` represents an invocation of the installation, from start to finish.
@@ -94,27 +94,28 @@ assisted_installer_cluster_installation_started{platform="metal", version="4.6"}
 ```
 # HELP assisted_installer_cluster_installation_minutes represents an invocation of the installation, from start to finish.
 # TYPE assisted_installer_cluster_installation_minutes histogram
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="1"} 0
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="5"} 0
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="10"} 0
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="15"} 0
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="20"} 0
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="25"} 0
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="30"} 1
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="35"} 1
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="40"} 1
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="45"} 1
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="50"} 1
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="55"} 1
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="60"} 1
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success",version="4.6",le="+Inf"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="1"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="5"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="10"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="15"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="20"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="25"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="30"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="35"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="40"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="45"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="50"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="55"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="60"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="+Inf"} 1
 ```
 The example above represents a single sample. This sample indicates that a user successfully installed a 4.6 cluster, which took between 30 and 35 minutes to complete installation. 
 
 ###### Label Values
  * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
  * `result` - as a first stage will be binary (success/failure), once we support error codes we would use those
- * `version` - represents minor releases
+ * `version` - represents OCP minor releases
+ * `agentversion` - represents minor versions of the assisted installer agent
  * `le` - the standard Prometheus label for histogram buckets, this represents how long the installation took to complete, from 1 minute (or less) to 60 minutes (or more), in increments of 5 minutes.
 
 ##### assisted_installer_host_installation_phase_minutes
@@ -123,20 +124,20 @@ The example above represents a single sample. This sample indicates that a user 
 ```
 # HELP assisted_installer_host_installation_stage_minutes represents a stage of the installation process for a host.
 # TYPE assisted_installer_host_installation_stage_minutes histogram
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success",version="4.6",le="1"} 0
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="5"} 0
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="10"} 0
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="15"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="20"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="25"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="30"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="35"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="40"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="45"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="50"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="55"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="60"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success",version="4.6",le="+Inf"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", version="4.6", agentversion="1.0", le="1"} 0
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="5"} 0
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="10"} 0
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="15"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="20"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="25"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="30"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="35"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="40"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="45"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="50"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="55"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="60"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="+Inf"} 1
 ```
 The example above represents a single sample. This sample indicates that during the installation of a 4.6 cluster, the phase where this worker host rebooted took between 10 and 15 minutes to complete.
 
@@ -156,8 +157,9 @@ The example above represents a single sample. This sample indicates that during 
     - worker
     - bootstrap-master
  * `result` - as a first stage will be binary (success/failure), once we support error codes we would use those
- * `version` - represents minor releases
-  * `le` - the standard Prometheus label for histogram buckets, this represents how long the installation took to complete, from 1 minute (or less) to 60 minutes (or more), in increments of 5 minutes.
+ * `version` - represents OCP minor releases
+ * `agentversion` - represents minor versions of the assisted installer agent
+ * `le` - the standard Prometheus label for histogram buckets, this represents how long the installation took to complete, from 1 minute (or less) to 60 minutes (or more), in increments of 5 minutes.
 
 ##### assisted_installer_cluster_dns_types
 `assisted_installer_cluster_dns_types` represents the number of clusters installed with private vs hosted DNS.
