@@ -68,12 +68,12 @@ The installer does not fit a typical Prometheus use case in that:
 ```
 # HELP assisted_installer_cluster_creations represents the number of cluster resources created in the assisted installer service.
 # TYPE assisted_installer_cluster_creations counter
-assisted_installer_cluster_creations{platform="metal", version="4.6"} 50
+assisted_installer_cluster_creations{platform="metal", ocp_version="4.6"} 50
 ```
 
 ###### Label Values
  * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
- * `version` - represents OCP minor releases
+ * `ocp_version` - represents OCP minor releases
 
 ##### assisted_installer_cluster_installation_started
 `assisted_installer_cluster_installation_started` represents the clusters that started the actual installation process. It signifies that a user was able to fulfill the requirements and boot the hosts, but not necessarily that the installation process completed in any way.
@@ -81,41 +81,41 @@ assisted_installer_cluster_creations{platform="metal", version="4.6"} 50
 ```
 # HELP assisted_installer_cluster_installation_started represents the number of clusters whose installation began.
 # TYPE assisted_installer_cluster_installation_started counter
-assisted_installer_cluster_installation_started{platform="metal", version="4.6"} 40
+assisted_installer_cluster_installation_started{platform="metal", ocp_version="4.6"} 40
 ```
 
 ###### Label Values
  * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
- * `version` - represents OCP minor releases
- 
+ * `ocp_version` - represents OCP minor releases
+
 ##### assisted_installer_cluster_installation_minutes
  `assisted_installer_cluster_installation_minutes` represents an invocation of the installation, from start to finish.
 
 ```
 # HELP assisted_installer_cluster_installation_minutes represents an invocation of the installation, from start to finish.
 # TYPE assisted_installer_cluster_installation_minutes histogram
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="1"} 0
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="5"} 0
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="10"} 0
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="15"} 0
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="20"} 0
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="25"} 0
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="30"} 1
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="35"} 1
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="40"} 1
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="45"} 1
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="50"} 1
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="55"} 1
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="60"} 1
-assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", version="4.6", agentversion="1.0", le="+Inf"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", ocp_version="4.6", agent_version="1.0", le="1"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", ocp_version="4.6", agent_version="1.0", le="5"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", ocp_version="4.6", agent_version="1.0", le="10"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", ocp_version="4.6", agent_version="1.0", le="15"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", ocp_version="4.6", agent_version="1.0", le="20"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", ocp_version="4.6", agent_version="1.0", le="25"} 0
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", ocp_version="4.6", agent_version="1.0", le="30"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", ocp_version="4.6", agent_version="1.0", le="35"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", ocp_version="4.6", agent_version="1.0", le="40"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", ocp_version="4.6", agent_version="1.0", le="45"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", ocp_version="4.6", agent_version="1.0", le="50"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", ocp_version="4.6", agent_version="1.0", le="55"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", ocp_version="4.6", agent_version="1.0", le="60"} 1
+assisted_installer_cluster_installation_minutes_bucket{platform="metal", result="success", ocp_version="4.6", agent_version="1.0", le="+Inf"} 1
 ```
 The example above represents a single sample. This sample indicates that a user successfully installed a 4.6 cluster, which took between 30 and 35 minutes to complete installation. 
 
 ###### Label Values
  * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
  * `result` - as a first stage will be binary (success/failure), once we support error codes we would use those
- * `version` - represents OCP minor releases
- * `agentversion` - represents minor versions of the assisted installer agent
+ * `ocp_version` - represents OCP minor releases
+ * `agent_version` - represents minor versions of the assisted installer agent
  * `le` - the standard Prometheus label for histogram buckets, this represents how long the installation took to complete, from 1 minute (or less) to 60 minutes (or more), in increments of 5 minutes.
 
 ##### assisted_installer_host_installation_phase_minutes
@@ -124,20 +124,20 @@ The example above represents a single sample. This sample indicates that a user 
 ```
 # HELP assisted_installer_host_installation_stage_minutes represents a stage of the installation process for a host.
 # TYPE assisted_installer_host_installation_stage_minutes histogram
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", version="4.6", agentversion="1.0", le="1"} 0
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="5"} 0
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="10"} 0
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="15"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="20"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="25"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="30"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="35"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="40"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="45"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="50"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="55"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="60"} 1
-assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker",result="success", version="4.6", agentversion="1.0", le="+Inf"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", ocp_version="4.6", agent_version="1.0", le="1"} 0
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", ocp_version="4.6", agent_version="1.0", le="5"} 0
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", ocp_version="4.6", agent_version="1.0", le="10"} 0
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", ocp_version="4.6", agent_version="1.0", le="15"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", ocp_version="4.6", agent_version="1.0", le="20"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", ocp_version="4.6", agent_version="1.0", le="25"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", ocp_version="4.6", agent_version="1.0", le="30"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", ocp_version="4.6", agent_version="1.0", le="35"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", ocp_version="4.6", agent_version="1.0", le="40"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", ocp_version="4.6", agent_version="1.0", le="45"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", ocp_version="4.6", agent_version="1.0", le="50"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", ocp_version="4.6", agent_version="1.0", le="55"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", ocp_version="4.6", agent_version="1.0", le="60"} 1
+assisted_installer_host_installation_stage_minutes_bucket{platform="metal", stage="Rebooting", role="worker", result="success", ocp_version="4.6", agent_version="1.0", le="+Inf"} 1
 ```
 The example above represents a single sample. This sample indicates that during the installation of a 4.6 cluster, the phase where this worker host rebooted took between 10 and 15 minutes to complete.
 
@@ -157,8 +157,8 @@ The example above represents a single sample. This sample indicates that during 
     - worker
     - bootstrap-master
  * `result` - as a first stage will be binary (success/failure), once we support error codes we would use those
- * `version` - represents OCP minor releases
- * `agentversion` - represents minor versions of the assisted installer agent
+ * `ocp_version` - represents OCP minor releases
+ * `agent_version` - represents minor versions of the assisted installer agent
  * `le` - the standard Prometheus label for histogram buckets, this represents how long the installation took to complete, from 1 minute (or less) to 60 minutes (or more), in increments of 5 minutes.
 
 ##### assisted_installer_cluster_dns_types
@@ -167,13 +167,13 @@ The example above represents a single sample. This sample indicates that during 
 ```
 # HELP assisted_installer_cluster_dns_types represents the number of clusters installed with private vs hosted DNS.
 # TYPE assisted_installer_cluster_dns_types counter
-assisted_installer_cluster_creations{platform="metal", result="success", version="4.6", hosted="true"} 50
+assisted_installer_cluster_creations{platform="metal", result="success", ocp_version="4.6", hosted="true"} 50
 ```
 
 ###### Label Values
  * `platform` - the platform used for the installation (metal, vmware, aws, etc.)
  * `result` - as a first stage will be binary (success/failure), once we support error codes we would use those
- * `version` - represents minor releases
+ * `ocp_version` - represents minor releases
  * 'hosted' - DNS is hosted ("true") or not ("false")
 
 ##### assisted_installer_cluster_hosts
@@ -182,7 +182,7 @@ assisted_installer_cluster_creations{platform="metal", result="success", version
 ```
 # HELP assisted_installer_cluster_hosts represents the number of hosts in an installation.
 # TYPE assisted_installer_cluster_hosts counter
-assisted_installer_cluster_hosts{platform="metal", role="master", result="success", version="4.6"} 3
+assisted_installer_cluster_hosts{platform="metal", role="master", result="success", ocp_version="4.6"} 3
 ```
 
 ###### Label Values
@@ -191,7 +191,7 @@ assisted_installer_cluster_hosts{platform="metal", role="master", result="succes
     - master
     - worker
  * `result` - as a first stage will be binary (success/failure), once we support error codes we would use those
- * `version` - represents minor releases
+ * `ocp_version` - represents minor releases
 
 ##### assisted_installer_cluster_host_cores
  `assisted_installer_cluster_host_cores` represents the number of CPU cores for an installed host.
@@ -199,17 +199,17 @@ assisted_installer_cluster_hosts{platform="metal", role="master", result="succes
 ```
 # HELP assisted_installer_cluster_host_cores represents the number of CPU cores for an installed host.
 # TYPE assisted_installer_cluster_host_cores histogram
-assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="1"} 0
-assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="2"} 0
-assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="4"} 0
-assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="8"} 0
-assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="16"} 0
-assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="32"} 1
-assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="64"} 1
-assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="128"} 1
-assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="256"} 1
-assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="512"} 1
-assisted_installer_cluster_host_cores_bucket{platform="metal", role="master",result="success",version="4.6",le="+Inf"} 1
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="1"} 0
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="2"} 0
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="4"} 0
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="8"} 0
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="16"} 0
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="32"} 1
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="64"} 1
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="128"} 1
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="256"} 1
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="512"} 1
+assisted_installer_cluster_host_cores_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="+Inf"} 1
 ```
 The example above represents a single sample. This sample indicates that this host, that was successfully-installed with version 4.6 and a master role, had between 32 and 64 CPU cores.
 
@@ -219,7 +219,7 @@ The example above represents a single sample. This sample indicates that this ho
     - master
     - worker
  * `result` - as a first stage will be binary (success/failure), once we support error codes we would use those
- * `version` - represents minor releases
+ * `ocp_version` - represents minor releases
   * `le` - the standard Prometheus label for histogram buckets, this represents how many CPU cores there were, from 1 to 512 (or more) in powers of 2.
 
 ##### assisted_installer_cluster_host_ram_gib
@@ -228,16 +228,16 @@ The example above represents a single sample. This sample indicates that this ho
 ```
 # HELP assisted_installer_cluster_host_ram_gib represents the amount of RAM in GiB for an installed host.
 # TYPE assisted_installer_cluster_host_ram_gib histogram
-assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="8"} 0
-assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="16"} 0
-assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="32"} 1
-assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="64"} 1
-assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="128"} 1
-assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="256"} 1
-assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="512"} 1
-assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="1024"} 1
-assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="2048"} 1
-assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master",result="success",version="4.6",le="+Inf"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="8"} 0
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="16"} 0
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="32"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="64"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="128"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="256"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="512"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="1024"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="2048"} 1
+assisted_installer_cluster_host_ram_gib_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="+Inf"} 1
 ```
 The example above represents a single sample. This sample indicates that this host, that was successfully-installed with version 4.6 and a master role, had between 32 and 64 GiB of RAM.
 
@@ -247,7 +247,7 @@ The example above represents a single sample. This sample indicates that this ho
     - master
     - worker
  * `result` - as a first stage will be binary (success/failure), once we support error codes we would use those
- * `version` - represents minor releases
+ * `ocp_version` - represents minor releases
   * `le` - the standard Prometheus label for histogram buckets, this represents how much RAM there was in GiB, from 8 (the minimum) to 2 TiB (or more) in powers of 2.
 
 ##### assisted_installer_cluster_host_disk_gb
@@ -256,14 +256,14 @@ The example above represents a single sample. This sample indicates that this ho
 ```
 # HELP assisted_installer_cluster_host_disk_gb represents the size of a disk in GB in an installed host.
 # TYPE assisted_installer_cluster_host_disk_gb histogram
-assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="250"} 0
-assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="500"} 0
-assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="1000"} 1
-assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="2000"} 1
-assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="4000"} 1
-assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="8000"} 1
-assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="16000"} 1
-assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master",result="success",version="4.6",le="+Inf"} 1
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="250"} 0
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="500"} 0
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="1000"} 1
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="2000"} 1
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="4000"} 1
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="8000"} 1
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="16000"} 1
+assisted_installer_cluster_host_disk_gb_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="+Inf"} 1
 ```
 The example above represents a single sample. This sample indicates that this host, that was successfully-installed with version 4.6 and a master role, has a disk with capacity between 1TB and 2TB.
 
@@ -273,7 +273,7 @@ The example above represents a single sample. This sample indicates that this ho
     - master
     - worker
  * `result` - as a first stage will be binary (success/failure), once we support error codes we would use those
- * `version` - represents minor releases
+ * `ocp_version` - represents minor releases
   * `le` - the standard Prometheus label for histogram buckets, this represents the capacity of a disk in GB, from 250 (or less) to 16TB (or more), exponentially.
 
 ##### assisted_installer_cluster_host_nic_gbps
@@ -282,11 +282,11 @@ The example above represents a single sample. This sample indicates that this ho
 ```
 # HELP assisted_installer_cluster_host_nic_gbps represents the size of a NIC in Gbps in an installed host.
 # TYPE assisted_installer_cluster_host_nic_gbps histogram
-assisted_installer_cluster_host_nic_gbps_bucket{platform="metal", role="master",result="success",version="4.6",le="1"} 0
-assisted_installer_cluster_host_nic_gbps_bucket{platform="metal", role="master",result="success",version="4.6",le="10"} 0
-assisted_installer_cluster_host_nic_gbps_bucket{platform="metal", role="master",result="success",version="4.6",le="40"} 1
-assisted_installer_cluster_host_nic_gbps_bucket{platform="metal", role="master",result="success",version="4.6",le="100"} 1
-assisted_installer_cluster_host_nic_gbps_bucket{platform="metal", role="master",result="success",version="4.6",le="+Inf"} 1
+assisted_installer_cluster_host_nic_gbps_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="1"} 0
+assisted_installer_cluster_host_nic_gbps_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="10"} 0
+assisted_installer_cluster_host_nic_gbps_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="40"} 1
+assisted_installer_cluster_host_nic_gbps_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="100"} 1
+assisted_installer_cluster_host_nic_gbps_bucket{platform="metal", role="master", result="success", ocp_version="4.6",le="+Inf"} 1
 ```
 The example above represents a single sample. This sample indicates that this host, that was successfully-installed with version 4.6 and a master role, has a NIC with bandwidth between 40 and 100 Gbps.
 
@@ -296,131 +296,48 @@ The example above represents a single sample. This sample indicates that this ho
     - master
     - worker
  * `result` - as a first stage will be binary (success/failure), once we support error codes we would use those
- * `version` - represents minor releases
+ * `ocp_version` - represents minor releases
   * `le` - the standard Prometheus label for histogram buckets, this represents the bandwidth of a NIC in Gbps, from 1 to 100, covering the most common bandwidths.
 
 ### Risks and Mitigations
 
-What are the risks of this proposal and how do we mitigate. Think broadly. For
-example, consider both security and how this will impact the larger OKD
-ecosystem.
-
-How will security be reviewed and by whom? How will UX be reviewed and by whom?
-
-Consider including folks that also work outside your immediate sub-project.
+ > 1. Security: no information that can identify a particular installation/user/organization will be collected.
+ > 2. Cardinality: keep the amount of label values minimal.
 
 ## Design Details
 
-### Open Questions [optional]
+### Open Questions
 
-This is where to call out areas of the design that require closure before deciding
-to implement the design.  For instance, 
- > 1. This requires exposing previously private resources which contain sensitive
-  information.  Can we do this? 
+ > 1. We are considering adding the service version to each metric, but are wondering if the cardinality will be too high given that we plan to release every 2 weeks or so.
 
 ### Test Plan
 
-**Note:** *Section not required until targeted at a release.*
-
-Consider the following in developing a test plan for this enhancement:
-- Will there be e2e and integration tests, in addition to unit tests?
-- How will it be tested in isolation vs with other components?
-
-No need to outline all of the test cases, just the general strategy. Anything
-that would count as tricky in the implementation and anything particularly
-challenging to test should be called out.
-
-All code is expected to have adequate tests (eventually with coverage
-expectations).
+TBD
 
 ### Graduation Criteria
 
-**Note:** *Section not required until targeted at a release.*
-
-Define graduation milestones.
-
-These may be defined in terms of API maturity, or as something else. Initial proposal
-should keep this high-level with a focus on what signals will be looked at to
-determine graduation.
-
-Consider the following in developing the graduation criteria for this
-enhancement:
-- Maturity levels - `Dev Preview`, `Tech Preview`, `GA`
-- Deprecation
-
-Clearly define what graduation means.
-
-#### Examples
-
-These are generalized examples to consider, in addition to the aforementioned
-[maturity levels][maturity-levels].
-
-##### Dev Preview -> Tech Preview
-
-- Ability to utilize the enhancement end to end
-- End user documentation, relative API stability
-- Sufficient test coverage
-- Gather feedback from users rather than just developers
-
-##### Tech Preview -> GA 
-
-- More testing (upgrade, downgrade, scale)
-- Sufficient time for feedback
-- Available by default
-
-**For non-optional features moving to GA, the graduation criteria must include
-end to end tests.**
-
-##### Removing a deprecated feature
-
-- Announce deprecation and support policy of the existing feature
-- Deprecate the feature
+TBD
 
 ### Upgrade / Downgrade Strategy
 
-If applicable, how will the component be upgraded and downgraded? Make sure this
-is in the test plan.
-
-Consider the following in developing an upgrade/downgrade strategy for this
-enhancement:
-- What changes (in invocations, configurations, API use, etc.) is an existing
-  cluster required to make on upgrade in order to keep previous behavior?
-- What changes (in invocations, configurations, API use, etc.) is an existing
-  cluster required to make on upgrade in order to make use of the enhancement?
+TBD
 
 ### Version Skew Strategy
 
-How will the component handle version skew with other components?
-What are the guarantees? Make sure this is in the test plan.
-
-Consider the following in developing a version skew strategy for this
-enhancement:
-- During an upgrade, we will always have skew among components, how will this impact your work?
-- Does this enhancement involve coordinating behavior in the control plane and
-  in the kubelet? How does an n-2 kubelet without this feature available behave
-  when this feature is used?
-- Will any other components on the node change? For example, changes to CSI, CRI
-  or CNI may require updating that component before the kubelet.
+TBD
 
 ## Implementation History
 
-Major milestones in the life cycle of a proposal should be tracked in `Implementation
-History`.
+TBD
 
 ## Drawbacks
 
-The idea is to find the best form of an argument why this enhancement should _not_ be implemented.
+TBD
 
 ## Alternatives
 
-Similar to the `Drawbacks` section the `Alternatives` section is used to
-highlight and record other possible approaches to delivering the value proposed
-by an enhancement.
+TBD
 
 ## Infrastructure Needed [optional]
 
-Use this section if you need things from the project. Examples include a new
-subproject, repos requested, github details, and/or testing infrastructure.
-
-Listing these here allows the community to get the process for these resources
-started right away.
+TBD
